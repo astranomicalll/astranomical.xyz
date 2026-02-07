@@ -5,7 +5,7 @@
 
 @font-face {
     font-family: "ZZZ";
-    src: ZZZ.ttf;
+    src: url("fonts/ZZZ.ttf");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -23,32 +23,53 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-width: 320px;
+    justify-content: center;
     min-height: 100vh;
     align-items: center;
-
-    background-repeat: no-repeat;
-    background-size: contain;
+    background-color: #050505;
 }
 
-#constructionText {
-    margin-top: 20vh;
-    font-family: ZZZ.ttf;
+.maintenance-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 24px;
+    text-align: center;
+    max-width: 90%;
+    width: 600px;
+    box-shadow: 0 0 80px rgba(255,255,255,0.05);
 }
 
 .constructionGif {
     width: 100%;
-    height: 100%;
+    height: 300px;
+    border-radius: 16px;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    z-index: -1;
+    margin-bottom: 25px;
 }
+
 .constructionGif img {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+}
+
+#constructionText {
+    font-family: 'ZZZ';
+    font-size: 1.8rem;
+    color: white;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.constructionGif:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.7) 100%);
+    pointer-events: none;
 }
