@@ -36,31 +36,27 @@ body {
     padding: 20px;
     border-radius: 24px;
     text-align: center;
-    max-width: 90%;
-    width: 600px;
+    max-width: 1000px;
+    width: 90%;
     box-shadow: 0 0 80px rgba(255,255,255,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .constructionGif {
+    position: relative;
     width: 100%;
-    height: 300px;
-    border-radius: 16px;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
-    margin-bottom: 25px;
+    border-radius: 16px;
+    margin-bottom: 20px;
 }
 
 .constructionGif img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-#constructionText {
-    font-family: 'ZZZ';
-    font-size: 1.8rem;
-    color: white;
-    margin: 0;
-    letter-spacing: -0.5px;
 }
 
 .constructionGif:after {
@@ -72,4 +68,14 @@ body {
     height: 100%;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.7) 100%);
     pointer-events: none;
+}
+
+#constructionText {
+    font-family: 'ZZZ';
+    font-size: clamp(1.5rem, 5vw, 3rem); /* Grows with the screen size */
+    color: #ffffff;
+    /*text-transform: uppercase;*/
+    letter-spacing: 2px;
+    margin-top: 10px;
+    opacity: 0.9;
 }
