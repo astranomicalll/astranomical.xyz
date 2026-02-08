@@ -85,6 +85,12 @@ body {
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
+#constructionText a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
 .lol {
     width: 100%;
     height: auto;
