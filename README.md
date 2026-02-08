@@ -1,2 +1,2 @@
-# astranomical.xyz
+# https://astranomical.xyz
 
