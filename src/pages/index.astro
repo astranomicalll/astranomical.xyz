@@ -1,23 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { register } from '../data/members.js';
-
-/**
- * The cue stack. A member's Society number IS their cue number — the
- * register already runs like a lighting plot, so nothing is invented
- * here beyond the stage timings, which are the conceit's own material.
- *
- * Akivili's cue is called and never lit. They are dead; the horizon
- * refuses to rise for them.
- */
-const CUE_STATE = {
-  akivili:   { state: 'Held',        time: '05:44:00', held: true },
-  screwllum: { state: 'First Light', time: '06:02:00' },
-  ruanmei:   { state: 'Rose Gather', time: '06:18:00' },
-  herta:     { state: 'Dawn Wash',   time: '06:31:00' },
-};
-
-const cues = register.map((m) => ({ ...m, ...CUE_STATE[m.id] }));
+import { cues } from '../data/cues.js';
 
 const title = 'Genius Society — Restricted Archive';
 const description =
@@ -76,7 +59,13 @@ const description =
 
           <div>
             <h2 class="cue__name reveal" id={`name-${m.id}`}>
-              {m.name}
+              <a
+                class="namelink"
+                href={`/cue/${m.no}/`}
+                transition:name={`cue-name-${m.no}`}
+              >
+                {m.name}
+              </a>
             </h2>
             <p class="cue__role">{m.role}</p>
           </div>
@@ -155,11 +144,7 @@ const description =
                 <tr>
                   <td class="sheet__no">{m.no}</td>
                   <td>
-                    <a
-                      href={`#cue-${m.no}`}
-                      class="sheet__name"
-                      style="text-decoration:none;color:inherit"
-                    >
+                    <a class="sheet__name namelink" href={`/cue/${m.no}/`}>
                       {m.name}
                     </a>
                   </td>

@@ -1,0 +1,141 @@
+---
+import Base from '../../layouts/Base.astro';
+import { cues } from '../../data/cues.js';
+
+export function getStaticPaths() {
+  return cues.map((cue) => ({ params: { no: String(cue.no) }, props: { cue } }));
+}
+
+const { cue } = Astro.props;
+
+/* The page holds at this member's own cue. Arriving from the register —
+   which sits at full day — fades the sky down to their state. */
+const title = `Cue ${cue.no} · ${cue.name} — Genius Society`;
+const description = `${cue.name}, ${cue.role}. ${cue.path}. Standing: ${cue.status}.`;
+---
+
+<Base title={title} description={description}>
+  <article class="dossier" data-cue-hold={String(cue.no)}>
+    <nav class="dossier__back" aria-label="Breadcrumb">
+      <a class="backlink" href="/#cue-day">
+        <span aria-hidden="true">&larr;</span> Cue sheet
+      </a>
+      <p class="readout readout--dim">{cue.path}</p>
+    </nav>
+
+    <header class="dossier__head">
+      <p class="readout">
+        Cue {cue.no} &middot; {cue.time} &middot; {cue.state}
+      </p>
+      <h1
+        class={`dossier__name${cue.held ? ' dossier__name--held' : ''}`}
+        transition:name={`cue-name-${cue.no}`}
+      >
+        {cue.name}
+      </h1>
+      <p class="cue__role">{cue.role}</p>
+      {
+        cue.held && (
+          <p class="cue__held-note">Cue called &middot; no light restored</p>
+        )
+      }
+    </header>
+
+    <div class="dossier__grid">
+      <div class="reveal">
+        <p class="cue__bio">{cue.bio}</p>
+        {
+          cue.quote && (
+            <p class="cue__quote" style="margin-top:3rem">
+              {cue.quote}
+            </p>
+          )
+        }
+        {
+          cue.note && (
+            <p class="cue__bio" style="margin-top:2.5rem">
+              {cue.note}
+            </p>
+          )
+        }
+      </div>
+
+      <aside class="reveal" data-delay="140">
+        <dl class="plot">
+          <div class="plot__row">
+            <dt class="field-label">
+              {cue.status === 'Deceased' ? 'Nature' : 'Element'}
+            </dt>
+            <dd class="plot__val">{cue.element}</dd>
+          </div>
+          <div class="plot__row">
+            <dt class="field-label">
+              {cue.status === 'Deceased' ? 'Domain' : 'Specialty'}
+            </dt>
+            <dd class="plot__val">{cue.specialty}</dd>
+          </div>
+          <div class="plot__row">
+            <dt class="field-label">Standing</dt>
+            <dd class="plot__val">{cue.status}</dd>
+          </div>
+          <div class="plot__row">
+            <dt class="field-label">Cue state</dt>
+            <dd class="plot__val">{cue.state}</dd>
+          </div>
+          <div class="plot__row">
+            <dt class="field-label">Channel</dt>
+            <dd class="plot__val">{cue.held ? '00 %' : '100 %'}</dd>
+          </div>
+        </dl>
+
+        {
+          cue.peers.length > 0 && (
+            <div class="peers">
+              <p class="field-label">Also on this path</p>
+              <ul class="peers__list">
+                {cue.peers.map((p) => (
+                  <li>
+                    <a class="peers__link" href={`/cue/${p.no}/`}>
+                      <span class="peers__no">{p.no}</span>
+                      <span>{p.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+      </aside>
+    </div>
+
+    <nav class="dossier__step" aria-label="Adjacent cues">
+      {
+        cue.prev ? (
+          <a class="step step--prev" href={`/cue/${cue.prev.no}/`}>
+            <span class="field-label">Previous cue</span>
+            <span class="step__name">
+              {cue.prev.no} &nbsp; {cue.prev.name}
+            </span>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        cue.next ? (
+          <a class="step step--next" href={`/cue/${cue.next.no}/`}>
+            <span class="field-label">Next cue</span>
+            <span class="step__name">
+              {cue.next.no} &nbsp; {cue.next.name}
+            </span>
+          </a>
+        ) : (
+          <a class="step step--next" href="/#cue-day">
+            <span class="field-label">House at full</span>
+            <span class="step__name">Cue sheet</span>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</Base>

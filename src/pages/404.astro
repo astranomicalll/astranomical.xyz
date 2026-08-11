@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import { cues } from '../data/cues.js';
+---
+
+<Base
+  title="Cue not in the stack — Genius Society"
+  description="No such cue exists in the Society's record."
+>
+  <article class="dossier" data-cue-hold="00">
+    <nav class="dossier__back" aria-label="Breadcrumb">
+      <a class="backlink" href="/"><span aria-hidden="true">&larr;</span> Blackout</a>
+      <p class="readout readout--dim">Restricted archive</p>
+    </nav>
+
+    <header class="dossier__head">
+      <p class="readout">Cue &mdash;&mdash; &middot; &mdash;&mdash;:&mdash;&mdash;:&mdash;&mdash; &middot; Unwritten</p>
+      <h1 class="dossier__name dossier__name--held">Not in<br />the stack</h1>
+      <p class="cue__role">No such cue exists in the Society's record</p>
+    </header>
+
+    <div class="dossier__grid">
+      <p class="cue__bio">
+        The Society keeps four names. Membership is neither sought nor applied
+        for, and it is not extended by asking for it at an address. The house
+        lights stay down.
+      </p>
+
+      <aside>
+        <p class="field-label">The stack, in full</p>
+        <ul class="peers__list">
+          {
+            cues.map((c) => (
+              <li>
+                <a class="peers__link" href={`/cue/${c.no}/`}>
+                  <span class="peers__no">{c.no}</span>
+                  <span>{c.name}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+    </div>
+
+    <nav class="dossier__step" aria-label="Return">
+      <span></span>
+      <a class="step step--next" href="/">
+        <span class="field-label">Return to</span>
+        <span class="step__name">Cue 00</span>
+      </a>
+    </nav>
+  </article>
+</Base>
