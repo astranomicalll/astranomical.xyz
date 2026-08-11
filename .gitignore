@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Machine-local config
+.mcp.json
+.claude/settings.local.json
+.impeccable/hook.cache.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
