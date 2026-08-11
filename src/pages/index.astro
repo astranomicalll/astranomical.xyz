@@ -1,0 +1,208 @@
+---
+import Base from '../layouts/Base.astro';
+import { register } from '../data/members.js';
+
+/**
+ * The cue stack. A member's Society number IS their cue number — the
+ * register already runs like a lighting plot, so nothing is invented
+ * here beyond the stage timings, which are the conceit's own material.
+ *
+ * Akivili's cue is called and never lit. They are dead; the horizon
+ * refuses to rise for them.
+ */
+const CUE_STATE = {
+  akivili:   { state: 'Held',        time: '05:44:00', held: true },
+  screwllum: { state: 'First Light', time: '06:02:00' },
+  ruanmei:   { state: 'Rose Gather', time: '06:18:00' },
+  herta:     { state: 'Dawn Wash',   time: '06:31:00' },
+};
+
+const cues = register.map((m) => ({ ...m, ...CUE_STATE[m.id] }));
+
+const title = 'Genius Society — Restricted Archive';
+const description =
+  'Four intellects recognised by the Simulated Universe, held on record. A cue stack from blackout to full day.';
+---
+
+<Base title={title} description={description}>
+  <!-- ══ CUE 00 · BLACKOUT ══════════════════════════════════════ -->
+  <header class="masthead" id="cue-00" data-cue="00">
+    <div class="masthead__top">
+      <p class="readout">Cue 00 &middot; 00:00:00 &middot; Blackout</p>
+      <p class="readout readout--dim">Astral Express &middot; Restricted</p>
+    </div>
+
+    <div class="masthead__body">
+      <h1 class="masthead__title reveal">
+        <span>Genius</span><span>Society</span>
+      </h1>
+      <p class="masthead__lede reveal" data-delay="140">
+        Membership is neither sought nor applied for. It is recognised,
+        immutably, by the Simulated Universe. The house lights are down. What
+        follows is a cue stack, run once, from blackout to full day.
+      </p>
+    </div>
+
+    <div class="masthead__foot">
+      <p class="field-label">Members on record &nbsp;/&nbsp; 04</p>
+      <p class="field-label">Scroll to advance the cue &darr;</p>
+    </div>
+  </header>
+
+  <!-- ══ ON INTELLIGENCE ════════════════════════════════════════ -->
+  <section class="manifesto" aria-labelledby="manifesto-label">
+    <p class="field-label" id="manifesto-label">On intelligence</p>
+    <p class="manifesto__text reveal">
+      Genius is not a gift. It is <em>a verdict</em> handed down by the cosmos
+      itself.
+    </p>
+  </section>
+
+  <main id="cue-stack">
+    {
+      cues.map((m) => (
+        <section
+          class={`cue${m.held ? ' cue--held' : ''}`}
+          id={`cue-${m.no}`}
+          data-cue={m.no}
+          aria-labelledby={`name-${m.id}`}
+        >
+          <div class="cue__head">
+            <p class="readout">
+              Cue {m.no} &middot; {m.time} &middot; {m.state}
+            </p>
+            <p class="readout readout--dim">{m.path}</p>
+          </div>
+
+          <div>
+            <h2 class="cue__name reveal" id={`name-${m.id}`}>
+              {m.name}
+            </h2>
+            <p class="cue__role">{m.role}</p>
+          </div>
+
+          {m.held && (
+            <p class="cue__held-note">
+              Cue called &middot; no light restored
+            </p>
+          )}
+
+          <div class="cue__grid">
+            <div class="reveal" data-delay="120">
+              <p class="cue__bio">{m.bio}</p>
+              {m.quote && (
+                <p class="cue__quote" style="margin-top:2.5rem">
+                  {m.quote}
+                </p>
+              )}
+              {m.note && (
+                <p class="cue__bio" style="margin-top:2rem">
+                  {m.note}
+                </p>
+              )}
+            </div>
+
+            <dl class="plot reveal" data-delay="220">
+              <div class="plot__row">
+                <dt class="field-label">
+                  {m.status === 'Deceased' ? 'Nature' : 'Element'}
+                </dt>
+                <dd class="plot__val">{m.element}</dd>
+              </div>
+              <div class="plot__row">
+                <dt class="field-label">
+                  {m.status === 'Deceased' ? 'Domain' : 'Specialty'}
+                </dt>
+                <dd class="plot__val">{m.specialty}</dd>
+              </div>
+              <div class="plot__row">
+                <dt class="field-label">Standing</dt>
+                <dd class="plot__val">{m.status}</dd>
+              </div>
+              <div class="plot__row">
+                <dt class="field-label">Channel</dt>
+                <dd class="plot__val">
+                  {m.held ? '00 %' : '100 %'}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+      ))
+    }
+
+    <!-- ══ DAY · THE REGISTER, FULLY EXPOSED ════════════════════ -->
+    <section class="sheet" id="cue-day" data-cue="day" aria-labelledby="sheet-label">
+      <div class="sheet__head">
+        <p class="field-label" id="sheet-label">Cue sheet &nbsp;/&nbsp; house at full</p>
+        <p class="readout">Approved for public eyes</p>
+      </div>
+
+      <div class="sheet__scroll">
+        <table class="sheet__table">
+          <thead>
+            <tr>
+              <th scope="col">Cue</th>
+              <th scope="col">Name</th>
+              <th scope="col">Designation</th>
+              <th scope="col">State</th>
+              <th scope="col">Standing</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              cues.map((m) => (
+                <tr>
+                  <td class="sheet__no">{m.no}</td>
+                  <td>
+                    <a
+                      href={`#cue-${m.no}`}
+                      class="sheet__name"
+                      style="text-decoration:none;color:inherit"
+                    >
+                      {m.name}
+                    </a>
+                  </td>
+                  <td>{m.role}</td>
+                  <td>{m.state}</td>
+                  <td>
+                    <span class="sheet__state">{m.status}</span>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- ══ CUE RAIL ═══════════════════════════════════════════════ -->
+  <nav class="rail" aria-label="Cue stack">
+    <a class="rail__cue" href="#cue-00" aria-current="true">
+      <span class="rail__no">00</span>
+      <span class="rail__name">Blackout</span>
+    </a>
+    {
+      cues.map((m) => (
+        <a class="rail__cue" href={`#cue-${m.no}`} aria-current="false">
+          <span class="rail__no">{m.no}</span>
+          <span class="rail__name">{m.name}</span>
+        </a>
+      ))
+    }
+    <a class="rail__cue" href="#cue-day" aria-current="false">
+      <span class="rail__no">&mdash;</span>
+      <span class="rail__name">Register</span>
+    </a>
+  </nav>
+
+  <footer class="foot">
+    <p class="field-label">Genius Society &middot; Restricted Archive</p>
+    <p class="field-label">Intellect recognised. Never awarded.</p>
+  </footer>
+</Base>
+
+<script>
+  import '../scripts/cyclorama.js';
+</script>

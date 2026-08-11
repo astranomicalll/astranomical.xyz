@@ -1,0 +1,630 @@
+/* ═══════════════════════════════════════════════════════════════════
+   GENIUS SOCIETY — CUE STACK
+   The cyclorama is the interface. Light is the system.
+
+   Two colour layers exist:
+     · The named cue plot (--night … --day) is fixed vocabulary.
+     · The live layer (--ink, --rule, --readout) is written by the
+       cyclorama engine as the cue advances, so every element inverts
+       with the sky instead of being restyled per section.
+   ═══════════════════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* ── The cue plot ── */
+  --night: #050506;
+  --cobalt: #0a2bff;
+  --rose-gather: #d24bff;
+  --rose-light: #ff7bae;
+  --dawn-wash: #ffd7e6;
+  --day: #ffffff;
+
+  /* ── Live cue state (written by the engine, these are cue 00) ── */
+  --ink: #e6e6f0;
+  --ink-dim: #4a4a5a;
+  --readout: #0a2bff;
+  --rule: rgba(230, 230, 240, 0.14);
+  --rule-faint: rgba(230, 230, 240, 0.07);
+
+  /* ── Measure ── */
+  --gutter: clamp(1.25rem, 4vw, 4.5rem);
+  --rail: 12.5rem;
+
+  --stencil: 'Big Shoulders Stencil Display', 'Arial Narrow', sans-serif;
+  --mono: 'Martian Mono', ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--mono);
+  font-weight: 300;
+  background: var(--night);
+  color: var(--ink);
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: color 0.6s linear;
+}
+
+::selection {
+  background: var(--rose-gather);
+  color: var(--day);
+}
+
+/* ═══ THE CYCLORAMA ═══════════════════════════════════════════════ */
+
+.cyc {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Everything else rides above the light. */
+.stage {
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══ READOUTS ════════════════════════════════════════════════════
+   The smallest voice in the system: cue numbers, timecodes, field
+   names. Tabular figures matter — these columns must align.
+   ═══════════════════════════════════════════════════════════════ */
+
+.readout {
+  font-family: var(--mono);
+  font-size: clamp(0.56rem, 0.72vw, 0.7rem);
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: var(--readout);
+  transition: color 0.6s linear;
+}
+
+.readout--dim {
+  color: var(--ink-dim);
+}
+
+.field-label {
+  font-family: var(--mono);
+  font-size: clamp(0.5rem, 0.62vw, 0.6rem);
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  transition: color 0.6s linear;
+}
+
+/* ═══ CUE RAIL ════════════════════════════════════════════════════
+   Fixed, deep-linkable, text-equivalent. Every cue carries its NAME,
+   never colour alone — the grammar's own accessibility rule.
+   ═══════════════════════════════════════════════════════════════ */
+
+.rail {
+  position: fixed;
+  top: 50%;
+  right: var(--gutter);
+  transform: translateY(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 1px solid var(--rule);
+  padding-left: 1rem;
+  transition: border-color 0.6s linear;
+}
+
+.rail__cue {
+  display: grid;
+  grid-template-columns: 3.2ch 1fr;
+  align-items: baseline;
+  gap: 0.85rem;
+  padding: 0.62rem 0;
+  text-decoration: none;
+  color: var(--ink-dim);
+  transition: color 0.35s ease, opacity 0.35s ease;
+  opacity: 0.5;
+}
+
+.rail__cue:hover,
+.rail__cue:focus-visible {
+  opacity: 1;
+  color: var(--ink);
+  outline: none;
+}
+
+.rail__cue[aria-current='true'] {
+  opacity: 1;
+  color: var(--ink);
+}
+
+.rail__no {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+
+.rail__name {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* The active cue is marked by a drawn bar, not by colour alone. */
+.rail__cue::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  width: 1px;
+  height: 0;
+  background: var(--readout);
+  transition: height 0.4s ease;
+}
+
+.rail__cue {
+  position: relative;
+}
+
+.rail__cue[aria-current='true']::before {
+  height: 100%;
+  top: 0;
+}
+
+@media (max-width: 900px) {
+  .rail {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    flex-direction: row;
+    justify-content: space-between;
+    border-left: none;
+    border-top: 1px solid var(--rule);
+    padding: 0.5rem var(--gutter) calc(0.5rem + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--night) 72%, transparent);
+    backdrop-filter: blur(14px);
+  }
+
+  .rail__cue {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+    padding: 0.3rem 0;
+    text-align: center;
+  }
+
+  .rail__cue::before {
+    left: 0;
+    right: 0;
+    top: 0;
+    width: auto;
+    height: 0;
+  }
+
+  .rail__cue[aria-current='true']::before {
+    height: 1px;
+  }
+
+  .rail__name {
+    font-size: 0.45rem;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* ═══ MASTHEAD — CUE 00 ═══════════════════════════════════════════ */
+
+.masthead {
+  min-height: 100svh;
+  padding: var(--gutter);
+  padding-right: calc(var(--gutter) + var(--rail));
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .masthead {
+    padding-right: var(--gutter);
+    min-height: 92svh;
+  }
+}
+
+.masthead__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.masthead__body {
+  align-self: end;
+  max-width: 34ch;
+}
+
+.masthead__title {
+  font-family: var(--stencil);
+  font-weight: 400;
+  font-size: clamp(4.5rem, 16vw, 15rem);
+  line-height: 0.82;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 0.6s linear;
+  margin-bottom: 2rem;
+}
+
+.masthead__title span {
+  display: block;
+}
+
+.masthead__lede {
+  font-size: clamp(0.72rem, 0.95vw, 0.85rem);
+  font-weight: 300;
+  line-height: 2;
+  color: var(--ink-dim);
+  border-left: 1px solid var(--rule);
+  padding-left: 1.25rem;
+  transition: color 0.6s linear, border-color 0.6s linear;
+}
+
+.masthead__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+}
+
+/* ═══ MANIFESTO ═══════════════════════════════════════════════════ */
+
+.manifesto {
+  min-height: 70svh;
+  display: grid;
+  place-content: center;
+  padding: 8rem var(--gutter);
+  text-align: center;
+}
+
+.manifesto__text {
+  font-family: var(--stencil);
+  font-weight: 300;
+  font-size: clamp(1.75rem, 5.5vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  max-width: 18ch;
+  margin: 1.5rem auto 0;
+  color: var(--ink);
+  transition: color 0.6s linear;
+}
+
+.manifesto__text em {
+  font-style: normal;
+  color: var(--readout);
+  transition: color 0.6s linear;
+}
+
+/* ═══ CUE — one member ════════════════════════════════════════════ */
+
+.cue {
+  min-height: 100svh;
+  padding: 14svh var(--gutter);
+  padding-right: calc(var(--gutter) + var(--rail));
+  display: grid;
+  align-content: center;
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  border-top: 1px solid var(--rule-faint);
+  transition: border-color 0.6s linear;
+}
+
+@media (max-width: 900px) {
+  .cue {
+    padding-right: var(--gutter);
+    padding-bottom: 18svh;
+  }
+}
+
+.cue__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cue__name {
+  font-family: var(--stencil);
+  font-weight: 400;
+  font-size: clamp(3.5rem, 13vw, 11rem);
+  line-height: 0.84;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 0.6s linear, opacity 0.6s linear;
+}
+
+.cue__role {
+  font-family: var(--mono);
+  font-size: clamp(0.56rem, 0.75vw, 0.7rem);
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  transition: color 0.6s linear;
+}
+
+.cue__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: start;
+}
+
+@media (max-width: 780px) {
+  .cue__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cue__bio {
+  font-size: clamp(0.72rem, 0.92vw, 0.82rem);
+  font-weight: 300;
+  line-height: 2.05;
+  color: var(--ink-dim);
+  max-width: 62ch;
+  transition: color 0.6s linear;
+}
+
+/* Tabular member data — a cue's channel levels. */
+.plot {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  transition: border-color 0.6s linear;
+}
+
+.plot__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule-faint);
+  transition: border-color 0.6s linear;
+}
+
+.plot__val {
+  font-family: var(--mono);
+  font-size: clamp(0.68rem, 0.85vw, 0.78rem);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 0.6s linear;
+}
+
+/* ── The held cue. Akivili: called, never lit. ── */
+.cue--held .cue__name {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--ink-dim);
+  opacity: 0.85;
+}
+
+.cue--held .plot__val {
+  color: var(--ink-dim);
+}
+
+.cue__held-note {
+  font-family: var(--mono);
+  font-size: clamp(0.5rem, 0.62vw, 0.6rem);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  border: 1px solid var(--rule);
+  padding: 0.5rem 0.9rem;
+  justify-self: start;
+  transition: color 0.6s linear, border-color 0.6s linear;
+}
+
+.cue__quote {
+  font-family: var(--stencil);
+  font-weight: 300;
+  font-size: clamp(1.35rem, 3.2vw, 2.75rem);
+  line-height: 1.12;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-left: 2px solid var(--ink-dim);
+  padding-left: clamp(1rem, 2vw, 1.75rem);
+  transition: color 0.6s linear, border-color 0.6s linear;
+}
+
+/* ═══ CUE SHEET — the register, at full day ═══════════════════════ */
+
+.sheet {
+  padding: clamp(5rem, 12svh, 10rem) var(--gutter);
+  padding-right: calc(var(--gutter) + var(--rail));
+}
+
+@media (max-width: 900px) {
+  .sheet {
+    padding-right: var(--gutter);
+    padding-bottom: 18svh;
+  }
+}
+
+.sheet__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.5rem;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+  transition: border-color 0.6s linear;
+}
+
+.sheet__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.sheet__table th {
+  font-family: var(--mono);
+  font-size: clamp(0.5rem, 0.6vw, 0.58rem);
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  text-align: left;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid var(--rule);
+  transition: color 0.6s linear, border-color 0.6s linear;
+}
+
+.sheet__table td {
+  padding: clamp(1rem, 2vw, 1.6rem) 1rem clamp(1rem, 2vw, 1.6rem) 0;
+  border-bottom: 1px solid var(--rule-faint);
+  font-size: clamp(0.62rem, 0.8vw, 0.74rem);
+  font-weight: 300;
+  color: var(--ink-dim);
+  vertical-align: baseline;
+  transition: color 0.6s linear, border-color 0.6s linear;
+}
+
+.sheet__no {
+  font-weight: 500;
+  font-size: clamp(0.72rem, 0.95vw, 0.9rem);
+  color: var(--ink);
+  width: 5ch;
+}
+
+.sheet__name {
+  font-family: var(--stencil);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2.6vw, 2.25rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.sheet__state {
+  font-family: var(--mono);
+  font-size: clamp(0.48rem, 0.6vw, 0.56rem);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  padding: 0.25rem 0.6rem;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* Scroll the sheet, never the page. */
+.sheet__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 640px) {
+  .sheet__table {
+    min-width: 34rem;
+  }
+}
+
+/* ═══ FOOT ════════════════════════════════════════════════════════ */
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 3rem var(--gutter) clamp(4rem, 14svh, 9rem);
+  border-top: 1px solid var(--rule);
+  transition: border-color 0.6s linear;
+}
+
+@media (max-width: 900px) {
+  .foot {
+    padding-bottom: 22svh;
+  }
+}
+
+/* ═══ REVEAL ══════════════════════════════════════════════════════
+   Content is visible by default; the class only arrives via JS, so a
+   failed script can never leave the page blank.
+   ═══════════════════════════════════════════════════════════════ */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js .reveal.is-lit {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--cobalt);
+  color: var(--day);
+  padding: 0.75rem 1.25rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.skip:focus {
+  left: var(--gutter);
+  top: var(--gutter);
+}
+
+:focus-visible {
+  outline: 2px solid var(--readout);
+  outline-offset: 3px;
+}

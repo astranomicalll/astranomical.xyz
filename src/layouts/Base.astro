@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#050506" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@300;400;500&family=Martian+Mono:wght@300;400;500&display=swap"
+    />
+
+    <!-- Synchronous and in <head> on purpose: a deferred module would let the
+         page paint lit, then snap dark as .reveal applies. is:inline keeps
+         Astro from hoisting it into the bundle. -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+
+  <body>
+    <!--
+      THESIS: The Society's record is a lighting cue stack, not a page of member
+      cards; it refuses the glowing-grid-in-cosmic-void this category always ships.
+      OWN-WORLD: One seamless cyclorama travelling #050506 > #0A2BFF > #D24BFF >
+      #FF7BAE > #FFFFFF. Stencil-cut display caps, Martian Mono tabular readouts,
+      hairline rules. No cards, no radius, no shadows. Light is the only container.
+      STORY: The visitor enters blackout, meets four members as numbered cues,
+      watches the horizon rise with each, and leaves in full day with the register
+      legible and inverted to black-on-white.
+      FIRST VIEWPORT: Near-black cyc, faint horizon at 75% height, "CUE 00 /
+      BLACKOUT" readout in cobalt top-left, stencil GENIUS SOCIETY set huge at
+      lower-left, cue rail fixed right.
+      FORM: Cyclorama - user-chosen challenger over assigned index 6 (Museum
+      Vitrine). Seed key a5ff48dc.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the
+      finish review, the verdict, and DESIGN.md
+    -->
+    <a class="skip" href="#cue-stack">Skip to the cue stack</a>
+    <canvas class="cyc" id="cyc" aria-hidden="true"></canvas>
+    <div class="stage">
+      <slot />
+    </div>
+  </body>
+</html>
