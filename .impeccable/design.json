@@ -1,0 +1,269 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-11T00:00:00.000Z",
+  "title": "Design System: Genius Society Archive",
+  "extensions": {
+    "colorMeta": {
+      "puppet-violet": {
+        "role": "primary",
+        "displayName": "Puppet Violet",
+        "canonical": "#c49eff",
+        "tonalRamp": ["#120d1a", "#1f1630", "#31234d", "#46316d", "#5d418e", "#8161b5", "#a98ad9", "#d4c4f2"]
+      },
+      "deep-amethyst": {
+        "role": "primary",
+        "displayName": "Deep Amethyst",
+        "canonical": "#7b4fa6",
+        "tonalRamp": ["#100b16", "#1b1228", "#2b1d40", "#3e2a5c", "#54397b", "#6d4a9b", "#9375c0", "#c0abdd"]
+      },
+      "amethyst-wash": {
+        "role": "primary",
+        "displayName": "Amethyst Wash",
+        "canonical": "rgba(123,79,166,0.08)"
+      },
+      "glacial-periwinkle": {
+        "role": "secondary",
+        "displayName": "Glacial Periwinkle",
+        "canonical": "#9bbcf5",
+        "tonalRamp": ["#0b0f1a", "#131c30", "#1d2c4d", "#28406d", "#33548e", "#4a72b3", "#7699d8", "#b3ccf3"]
+      },
+      "deep-cobalt": {
+        "role": "secondary",
+        "displayName": "Deep Cobalt",
+        "canonical": "#3a5fa8",
+        "tonalRamp": ["#090d15", "#101828", "#182644", "#213661", "#2c4880", "#3a5fa8", "#5f83c9", "#9db6e4"]
+      },
+      "cobalt-wash": {
+        "role": "secondary",
+        "displayName": "Cobalt Wash",
+        "canonical": "rgba(58,95,168,0.1)"
+      },
+      "clockwork-jade": {
+        "role": "secondary",
+        "displayName": "Clockwork Jade",
+        "canonical": "#6fd4b8",
+        "tonalRamp": ["#08130f", "#0e2019", "#153429", "#1d4a3b", "#25604e", "#357f68", "#57ab90", "#9adcc4"]
+      },
+      "deep-verdigris": {
+        "role": "secondary",
+        "displayName": "Deep Verdigris",
+        "canonical": "#2a7a6a",
+        "tonalRamp": ["#07110e", "#0c1d18", "#122f26", "#194136", "#215547", "#2a7a6a", "#48a08c", "#8ecbba"]
+      },
+      "verdigris-wash": {
+        "role": "secondary",
+        "displayName": "Verdigris Wash",
+        "canonical": "rgba(42,122,106,0.1)"
+      },
+      "trailblaze-gold": {
+        "role": "tertiary",
+        "displayName": "Trailblaze Gold",
+        "canonical": "#f5c96a",
+        "tonalRamp": ["#1a1206", "#2e1f0a", "#4a3210", "#6b4817", "#8d5f1e", "#b17d2c", "#d5a648", "#f2d494"]
+      },
+      "deep-ochre": {
+        "role": "tertiary",
+        "displayName": "Deep Ochre",
+        "canonical": "#b87a1a",
+        "tonalRamp": ["#150e04", "#251a08", "#3d290d", "#573a13", "#75501a", "#b87a1a", "#d9a44f", "#efd0a0"]
+      },
+      "ochre-wash": {
+        "role": "tertiary",
+        "displayName": "Ochre Wash",
+        "canonical": "rgba(184,122,26,0.1)"
+      },
+      "void-black": {
+        "role": "neutral",
+        "displayName": "Void Black",
+        "canonical": "#0a090f",
+        "tonalRamp": ["#0a090f", "#100e18", "#16131f", "#221e2e", "#332d42", "#4d4559", "#6b6478", "#9a8fb0"]
+      },
+      "panel-black": {
+        "role": "neutral",
+        "displayName": "Panel Black",
+        "canonical": "#100e18"
+      },
+      "raised-panel": {
+        "role": "neutral",
+        "displayName": "Raised Panel",
+        "canonical": "#16131f"
+      },
+      "instrument-white": {
+        "role": "neutral",
+        "displayName": "Instrument White",
+        "canonical": "#e8e4f0"
+      },
+      "dim-lavender": {
+        "role": "neutral",
+        "displayName": "Dim Lavender",
+        "canonical": "#9a8fb0"
+      },
+      "ledger-grey": {
+        "role": "neutral",
+        "displayName": "Ledger Grey",
+        "canonical": "#6b6478"
+      },
+      "rule-hairline": {
+        "role": "neutral",
+        "displayName": "Rule Hairline",
+        "canonical": "rgba(255,255,255,0.07)"
+      },
+      "rule-emphasis": {
+        "role": "neutral",
+        "displayName": "Rule Emphasis",
+        "canonical": "rgba(255,255,255,0.12)"
+      }
+    },
+    "typographyMeta": {
+      "watermark": {
+        "displayName": "Watermark",
+        "purpose": "The fixed two-line GENIUS / SOCIETY behind the hero. Sized to viewport, not to the type scale — a surface treatment rather than a heading."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero title only, capped at a 700px measure. Its <em> renders italic in Puppet Violet."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Member names. The single largest element inside any card."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "The manifesto statement, the register's serif name column, the featured pull quote, and stat values."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Member biographies and the hero description. The 1.9 line-height is what makes the block readable at this size."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Every field name, section eyebrow, path chip, status badge, nav link, and footer line. Tracking scales inversely with importance."
+      },
+      "index": {
+        "displayName": "Index",
+        "purpose": "Member catalogue numbers and register rank cells. Condensed and structural."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-default", "value": "ease", "purpose": "The only easing in the system. Applied bare, never as a cubic-bezier." },
+      { "name": "dur-color", "value": "0.2s", "purpose": "Nav link and other pure color hovers." },
+      { "name": "dur-state", "value": "0.3s", "purpose": "Member index and name shifting to their accent on card hover." },
+      { "name": "dur-surface", "value": "0.4s", "purpose": "Card wash fade, divider extension 2.5rem to 4rem, nav solidifying on scroll." },
+      { "name": "dur-reveal", "value": "0.7s", "purpose": "The fadeUp entrance — 28px rise into place." },
+      { "name": "stagger-card", "value": "0.1s", "purpose": "Interval between member cards entering." },
+      { "name": "stagger-hero", "value": "0.12s", "purpose": "Interval between hero children revealing once the scroll threshold is crossed." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "700px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Member Card",
+      "kind": "card",
+      "refersTo": "member-card",
+      "description": "A catalogued member entry. An instrument panel, not a floating card — no radius, no shadow, no lift. Hover brings the dormant accent forward as one coordinated gesture.",
+      "html": "<div class=\"ds-member-card\"><div class=\"ds-member-top\"><span class=\"ds-member-index\">NO. 83</span><span class=\"ds-path-chip\">Path of Erudition</span></div><h2 class=\"ds-member-name\">Herta</h2><div class=\"ds-member-role\">Proprietor, Herta Space Station</div><div class=\"ds-member-divider\"></div><p class=\"ds-member-bio\">The architect of the Simulated Universe project and owner of a space station dedicated to research and artifact collection.</p><div class=\"ds-member-stats\"><div><div class=\"ds-stat-label\">Element</div><div class=\"ds-stat-val\">Ice</div></div><div><div class=\"ds-stat-label\">Specialty</div><div class=\"ds-stat-val\">Sim. Universe</div></div><div><div class=\"ds-stat-label\">Status</div><div class=\"ds-stat-val\">Active</div></div></div></div>",
+      "css": ".ds-member-card { position: relative; overflow: hidden; background: var(--bg2, #100e18); color: var(--text, #e8e4f0); padding: 2.5rem; cursor: pointer; transition: background 0.35s; font-family: 'DM Mono', monospace; } .ds-member-card::after { content: ''; position: absolute; inset: 0; background: var(--herta-bg, rgba(123,79,166,0.08)); opacity: 0; transition: opacity 0.4s; pointer-events: none; } .ds-member-card:hover::after { opacity: 1; } .ds-member-card > * { position: relative; z-index: 1; } .ds-member-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; } .ds-member-index { font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; letter-spacing: 0.2em; color: var(--muted, #6b6478); transition: color 0.3s; } .ds-member-card:hover .ds-member-index { color: var(--herta-b, #c49eff); } .ds-path-chip { font-size: 0.57rem; letter-spacing: 0.13em; text-transform: uppercase; padding: 0.22rem 0.6rem; border: 1px solid rgba(123,79,166,0.3); color: var(--herta-a, #7b4fa6); transition: all 0.3s; } .ds-member-name { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2.8rem; font-weight: 300; line-height: 1; letter-spacing: -0.01em; margin: 0 0 0.5rem; transition: color 0.3s; } .ds-member-card:hover .ds-member-name { color: var(--herta-b, #c49eff); } .ds-member-role { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim, #9a8fb0); margin-bottom: 1.5rem; } .ds-member-divider { width: 2.5rem; height: 1px; background: rgba(255,255,255,0.12); margin-bottom: 1.5rem; transition: width 0.4s, background 0.4s; } .ds-member-card:hover .ds-member-divider { width: 4rem; background: var(--herta-a, #7b4fa6); } .ds-member-bio { font-size: 0.68rem; line-height: 1.9; color: var(--muted, #6b6478); margin: 0 0 2rem; } .ds-member-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem; } .ds-stat-label { font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted, #6b6478); margin-bottom: 0.3rem; } .ds-stat-val { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; font-weight: 400; line-height: 1; color: var(--herta-b, #c49eff); }"
+    },
+    {
+      "name": "Path Chip",
+      "kind": "chip",
+      "refersTo": "path-chip",
+      "description": "A member's classification. Outline only, never filled — a fill would read as a modern UI pill and break the ledger fiction.",
+      "html": "<span class=\"ds-path-chip-solo\">Path of Erudition</span>",
+      "css": ".ds-path-chip-solo { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.57rem; letter-spacing: 0.13em; text-transform: uppercase; padding: 0.22rem 0.6rem; border: 1px solid rgba(123,79,166,0.3); color: var(--herta-a, #7b4fa6); background: transparent; transition: all 0.3s; } .ds-path-chip-solo:hover { border-color: rgba(123,79,166,0.6); color: var(--herta-b, #c49eff); }"
+    },
+    {
+      "name": "Status Badge — Active",
+      "kind": "chip",
+      "refersTo": "status-badge",
+      "description": "Standing in the register. Outline in the member's bright accent at 50% alpha.",
+      "html": "<span class=\"ds-badge-active\">Active</span>",
+      "css": ".ds-badge-active { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.6rem; border: 1px solid rgba(123,79,166,0.5); color: var(--herta-b, #c49eff); background: transparent; }"
+    },
+    {
+      "name": "Status Badge — Deceased",
+      "kind": "chip",
+      "refersTo": "status-badge-inactive",
+      "description": "The exception that proves the color rule — drained of accent entirely. The absence of color carries the meaning.",
+      "html": "<span class=\"ds-badge-dead\">Deceased</span>",
+      "css": ".ds-badge-dead { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.6rem; border: 1px solid rgba(255,255,255,0.1); color: var(--muted, #6b6478); background: transparent; }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Fixed and transparent at rest; past 60px of scroll it gains a 92% ground, a 16px backdrop blur, a hairline border, and its wordmark fades in. The wordmark is deliberately absent at the top of the page, where the hero watermark is already the identity.",
+      "html": "<nav class=\"ds-nav ds-nav-scrolled\"><a href=\"#\" class=\"ds-nav-logo\">Genius Society</a><div class=\"ds-nav-links\"><a href=\"#\">Members</a><a href=\"#\">Rankings</a><a href=\"#\">Manifesto</a></div></nav>",
+      "css": ".ds-nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: transparent; border-bottom: 1px solid transparent; transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s; font-family: 'DM Mono', monospace; } .ds-nav-scrolled { background: rgba(10,9,15,0.92); backdrop-filter: blur(16px); border-bottom-color: rgba(255,255,255,0.07); } .ds-nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.28em; color: var(--herta-b, #c49eff); text-decoration: none; opacity: 0; transition: opacity 0.4s; } .ds-nav-scrolled .ds-nav-logo { opacity: 1; } .ds-nav-links { display: flex; gap: 2rem; } .ds-nav-links a { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted, #6b6478); text-decoration: none; transition: color 0.2s; } .ds-nav-links a:hover, .ds-nav-links a:focus-visible { color: var(--herta-b, #c49eff); outline: none; }"
+    },
+    {
+      "name": "Register Table",
+      "kind": "custom",
+      "refersTo": "register-cell",
+      "description": "A ledger page. Mono scaffolding with serif subjects dropped into it — the rank and name columns take each member's bright accent while everything else stays neutral.",
+      "html": "<table class=\"ds-register\"><thead><tr><th>No.</th><th>Name</th><th>Designation</th><th>Standing</th></tr></thead><tbody><tr><td class=\"ds-td-rank ds-c-ak\">36</td><td class=\"ds-td-name ds-c-ak\">Akivili</td><td>Aeon of Trailblaze</td><td><span class=\"ds-badge-dead\">Deceased</span></td></tr><tr><td class=\"ds-td-rank ds-c-herta\">83</td><td class=\"ds-td-name ds-c-herta\">Herta</td><td>Station Proprietor</td><td><span class=\"ds-badge-active\">Active</span></td></tr></tbody></table>",
+      "css": ".ds-register { width: 100%; border-collapse: collapse; font-family: 'DM Mono', monospace; } .ds-register thead tr { border-bottom: 1px solid rgba(255,255,255,0.12); } .ds-register th { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted, #6b6478); font-weight: 400; padding: 0.75rem 0; text-align: left; } .ds-register td { padding: 1.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.7rem; vertical-align: middle; color: var(--dim, #9a8fb0); } .ds-register tr:hover td { background: rgba(255,255,255,0.02); } .ds-td-rank { font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; letter-spacing: 0.12em; width: 60px; } .ds-td-name { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; font-weight: 300; } .ds-c-herta { color: var(--herta-b, #c49eff); } .ds-c-ak { color: var(--ak-b, #f5c96a); }"
+    },
+    {
+      "name": "Section Header",
+      "kind": "custom",
+      "description": "The repeating archive-division unit: a hairline top border, 1.5rem of clearance, then a mono uppercase label baseline-aligned against an italic serif count. The two-voice pairing in miniature.",
+      "html": "<div class=\"ds-section-header\"><span class=\"ds-section-label\">Society Members</span><span class=\"ds-section-count\">Active Dossiers — 04</span></div>",
+      "css": ".ds-section-header { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem; } .ds-section-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted, #6b6478); } .ds-section-count { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 0.9rem; font-style: italic; color: var(--muted, #6b6478); }"
+    },
+    {
+      "name": "Eyebrow Tag",
+      "kind": "custom",
+      "description": "Signature element. A mono uppercase label at the system's widest tracking (0.3em), prefixed by a 2rem inline leader rule borrowed from the way a catalogue entry opens.",
+      "html": "<div class=\"ds-eyebrow\">Astral Express — Restricted Archive</div>",
+      "css": ".ds-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--herta-a, #7b4fa6); } .ds-eyebrow::before { content: ''; display: inline-block; width: 2rem; height: 1px; background: var(--herta-a, #7b4fa6); vertical-align: middle; margin-right: 0.75rem; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Observatory Ledger",
+    "overview": "This is an astronomer's record book rendered as a website. Not a wiki, not a fan page — a catalogue kept by someone whose job is to observe and record, and who does not expect the record to be read casually. The violet grid ruling the background is star-chart paper. The enormous stroked outline numeral standing behind the hero is an instrument marking, etched rather than printed. Members are not profiles; they are catalogued bodies with fixed designations, and their numbers (83, 81, 76, 36) are given the same typographic dignity as their names.\n\nThe atmosphere is cold, exact, and reverent, with something faintly wrong underneath it. Two typefaces argue: DM Mono in tiny wide-tracked uppercase carries the bureaucratic layer — field labels, statuses, classifications, the machinery of the archive — while Cormorant Garamond's light italic serif carries the subjects themselves, and carries them beautifully. The friction between the two is the personality of the system. A clinical form containing something ornate and slightly uncanny. The archive respects what it catalogues without warming to the reader.\n\nRestraint does the work of authority. Body text sits at 0.68rem inside vast fields of near-black; the accent colors appear on perhaps five percent of any screen and mostly only on hover. Nothing is emphasized by making it louder — emphasis comes from a hairline moving, a single word shifting from grey to violet, a divider growing from 2.5rem to 4rem. The system is confident enough to whisper.",
+    "keyCharacteristics": [
+      "Violet-tinted near-black ground (#0a090f), never pure black — the whole surface has a hue",
+      "Hairline rules at 7% white doing all structural separation; no boxes, no fills, no cards that float",
+      "Two-voice typography: ornate serif for subjects, wide-tracked mono for the apparatus around them",
+      "Per-member accent color that stays dormant until the row or card is engaged",
+      "Square corners and flat surfaces throughout; depth is tonal, never cast",
+      "Very small type inside very large emptiness"
+    ],
+    "rules": [
+      { "name": "The Dormant Accent Rule", "body": "A member's color does not appear until their card or row is engaged. At rest, an entry is grey text on Panel Black with only its path chip and stat values tinted. Hover brings the index, the name, the divider, and an 8–10% wash forward together, in one 0.3–0.4s move. The color is a response, not a decoration.", "section": "colors" },
+      { "name": "The One Warm Entry Rule", "body": "Trailblaze Gold is the only warm hue in the system and it belongs to Akivili alone. Do not introduce a second warm accent; the singularity is what marks the Aeon as categorically apart.", "section": "colors" },
+      { "name": "The Tinted Ground Rule", "body": "No surface in this system is neutral grey or pure black. Every ground carries violet. #0a090f, #100e18, #16131f — the hue is what keeps the darkness from reading as a default.", "section": "colors" },
+      { "name": "The Two Voices Rule", "body": "Serif speaks for the subject; mono speaks for the archive. A member's name, their quote, the manifesto, and any stat value are serif. A field label, a status, a classification, and any body prose are mono. Never mix the assignment — a serif label or a mono member name breaks the fiction immediately.", "section": "typography" },
+      { "name": "The Tracking-Is-Scale Rule", "body": "Mono type never grows to signal importance; it tracks wider instead. 0.12em is a table badge, 0.2em is a field label, 0.3em is a section eyebrow. Size stays under 0.62rem regardless.", "section": "typography" },
+      { "name": "The Italic Reserve Rule", "body": "Italic Cormorant marks the two moments the archive stops being neutral: the emphasized word in a display line and the voice of a member quoted directly. Do not italicize for ordinary emphasis.", "section": "typography" },
+      { "name": "The Hairline Gap Rule", "body": "Grid gaps are 1px over a rule-colored background, never open space. Adjacent surfaces are separated by a drawn line, not a void. This is what makes the layout read as a ruled ledger.", "section": "layout" },
+      { "name": "The Full-Bleed Rule", "body": "No max-width container. The page runs edge to edge and constrains measure only at the individual text block that needs it.", "section": "layout" },
+      { "name": "The Drawn-Not-Cast Rule", "body": "Separation is drawn with a line or a tonal step, never cast with a shadow. This is the house default and it holds across the current system — a future build may break it, but only deliberately and only with a stated reason, never by reaching for a shadow as the reflexive way to separate two things.", "section": "elevation" },
+      { "name": "The Square Corner Rule", "body": "Nothing in this system is rounded. Square corners are the default and the expectation; introducing radius is a deliberate departure from the house style, not a neutral choice.", "section": "shapes" },
+      { "name": "The Outline Chip Rule", "body": "Chips and badges are outlines, never fills. A filled pill would read as a modern web UI component and break the ledger fiction instantly.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do keep Puppet Violet (#c49eff) as the site's single brand accent and scope the other three colors strictly to their member's card and register row.",
+      "Do follow the Two Voices Rule: Cormorant Garamond for subjects and values, DM Mono for labels and apparatus.",
+      "Do separate surfaces with a 1px hairline at 7% white or a single tonal step (#0a090f → #100e18).",
+      "Do use gap: 1px over a rule-colored background so grid gaps render as drawn lines.",
+      "Do hold accents dormant at rest and bring them forward as a single coordinated hover gesture across index, name, divider, and wash.",
+      "Do track mono type wider to signal importance instead of scaling it up.",
+      "Do tint every dark surface with violet rather than reaching for neutral grey or #000.",
+      "Do keep the deceased entry drained of accent — the absence of color is carrying meaning."
+    ],
+    "donts": [
+      "Don't add border-radius or box-shadow without a deliberate reason; square and flat are the house style, and reaching for either as the reflexive way to separate two things is the failure mode this system exists to avoid.",
+      "Don't fill a chip or badge. Outlines only.",
+      "Don't set a member name in mono or a field label in serif.",
+      "Don't introduce a second warm accent alongside Trailblaze Gold.",
+      "Don't bold a table header or a mono label — mono stays at weight 300–400 throughout.",
+      "Don't raise a card on hover with transform: translateY. Member cards are panels in a plane; lifting one breaks the ledger.",
+      "Don't go smaller than the current type floor. Body already sits at 0.68rem (≈10.9px) and labels at 0.55rem (≈8.8px), which is well under the 16px reading convention. The smallness is deliberate and the 1.9 line-height is what rescues it, but there is no headroom left — a rebuild should treat these as the minimum, and a bump toward 0.75rem body would cost the system nothing."
+    ]
+  }
+}
