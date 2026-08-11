@@ -135,6 +135,7 @@ body {
 }
 
 .rail__cue {
+  position: relative;
   display: grid;
   grid-template-columns: 3.2ch 1fr;
   align-items: baseline;
@@ -175,24 +176,24 @@ body {
   white-space: nowrap;
 }
 
-/* The active cue is marked by a drawn bar, not by colour alone. */
+/* The active cue is marked by a drawn bar, not by colour alone. It wipes
+   in on a transform rather than an animated height — the compositor
+   handles it, and the rail repaints on every scroll tick. */
 .rail__cue::before {
   content: '';
   position: absolute;
   left: -1px;
+  top: 0;
   width: 1px;
-  height: 0;
+  height: 100%;
   background: var(--readout);
-  transition: height 0.4s ease;
-}
-
-.rail__cue {
-  position: relative;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s ease;
 }
 
 .rail__cue[aria-current='true']::before {
-  height: 100%;
-  top: 0;
+  transform: scaleY(1);
 }
 
 @media (max-width: 900px) {
@@ -223,11 +224,13 @@ body {
     right: 0;
     top: 0;
     width: auto;
-    height: 0;
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: left;
   }
 
   .rail__cue[aria-current='true']::before {
-    height: 1px;
+    transform: scaleX(1);
   }
 
   .rail__name {
